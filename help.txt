@@ -1,0 +1,4 @@
+build: make
+set library path:
+    export LD_LIBRARY_PATH="./":$LD_LIBRARY_APTH
+run: ./test_uarm /dev/ttyACM0 all
