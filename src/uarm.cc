@@ -247,6 +247,7 @@ int Swift::connect(const string &_port, uint32_t _baudrate, Timeout timeout)
 			// r_thread.create();
 			// std::thread t(recv_thread_func, this);
 			r_thread = std::thread(recv_thread_func, this);
+			r_thread.detach();
 			return 0;
 		}
 		else {
