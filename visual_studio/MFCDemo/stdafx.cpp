@@ -5,5 +5,5 @@
 
 #include "stdafx.h"
 
-Swift swift;		// 定义全局类变量
+Swift swift("", 115200, Timeout::simpleTimeout(1000), 2, true);		// 定义全局类变量
 

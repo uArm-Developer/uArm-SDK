@@ -84,11 +84,12 @@ static std::string do_strip(const std::string &str, int striptype, const std::st
 		if (striptype != LEFTSTRIP)
 		{
 			j--;
-			while (j >= i&&memchr(sep, str[j], charslen))
+			while (j > 0 && j >= i&&memchr(sep, str[j], charslen))
 			{
 				j--;
 			}
-			j++;
+			if (j != 0)
+				j++;
 		}
 		//如果无需要删除的字符
 		if (0 == i&& j == strlen)

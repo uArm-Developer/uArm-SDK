@@ -48,7 +48,8 @@ public:
 	Swift(const std::string &port = "",
 		uint32_t baudrate = 115200,
 		Timeout timeout = Timeout::simpleTimeout(1000),
-		int cmd_pend_size = 2);
+		int cmd_pend_size = 2,
+		bool do_not_open = false);
 	virtual ~Swift();
 
 public:

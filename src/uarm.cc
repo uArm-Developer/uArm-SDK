@@ -32,7 +32,10 @@ static void recv_thread_func(void *arg)
 		try {
 			if (swift->ser.available() > 0) {
 				string result = swift->ser.readline();
-				result = rstrip(result, " \r\n");
+				if (result.length() <= 0) {
+					continue;
+				}
+				result = strip(result, " \r\n");
 				if (result.length() > 0) {
 					// cout << result << endl;
 					if (result[0] == '$') {
@@ -161,7 +164,7 @@ static void recv_thread_func(void *arg)
 	cout << "recv thread exit" << endl;
 }
 
-Swift::Swift(const string &_port, uint32_t _baudrate, Timeout timeout, int _cmd_pend_size)
+Swift::Swift(const string &_port, uint32_t _baudrate, Timeout timeout, int _cmd_pend_size, bool do_not_open)
 {
 	connected = false;
 	power_status = false;
@@ -184,7 +187,8 @@ Swift::Swift(const string &_port, uint32_t _baudrate, Timeout timeout, int _cmd_
 		result[i] = "";
 		callbacks[i] = NULL;
 	}
-	connect(port, baudrate, timeout);
+	if (!do_not_open)
+		connect(port, baudrate, timeout);
 }
 
 Swift::~Swift()
